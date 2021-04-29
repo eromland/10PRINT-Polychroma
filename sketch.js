@@ -1,28 +1,40 @@
-var segments = 30;
+var segments = 40;
 var Tiles = [];
 var tileIndex = 0;
-var savepath = '/home/erlend/Desktop/Prosjekter/10PRINT';
-var palette1 = ['#59484D', '#88BFB0', '#F2E4BB', '#F2A663', '#F2695C'];
-var palette2 = ['#E29C92', '#F6B3B9', '#FCDCC5', '#B0D9CD', '#63AAB5'];
-var palette3 = ['#8FA368', '#CBF084', '#F08286', '#489EA3', '#75E8F0'];
-var palette4 = ['#024873', '#024873', '#04BFAD', '#F28963', '#F25E5E'];
-var backgrounds = ['#F7A8B1', '#C4F2D4', '#FAEEE1'];
+const palette1 = ['#1A4568', '#5F84A1', '#90AFC4', '#B6D0E1', '#CBDEED'];
+/* Additional palettes
+const palette2 = ['#981C1C', '#AB2020', '#BF2424', '#C53939', '#CB4F4F'];
+const palette3 = ['#212226', '#1E4040', '#255954', '#3A8C7D', '#71D99E'];
+const palette4 = ['#F5F2DF', '#E07A5F', '#3D405B', '#81B29A', '#F2CC8F'];
+const palette5 = ['#062F40', '#025951', '#1D734B', '#168C40', '#82D92B'];
+const palette6 = ['#F22E62', '#FDEBEB', '#038C8C', '#F25C05', '#F2F2F2'];
+const palette7 = ['#F2AA52', '#F29849', '#D95204', '#A62F03', '#591607'];
+const palette8 = ['#499EBF', '#5BD9D9', '#F2C879', '#F29966', '#F28177'];
+const palette9 = ['#1B80BF', '#0D0D0D', '#F2F2F2', '#F27329', '#F25F29'];
+const palette10 = ['#6BBCC7', '#49676B', '#E66C6E', '#A3728C', '#93CCB3'];
+const palette11 = ['#F24B88', '#6080BF', '#63AEBF', '#F2B441', '#F2695C'];
+const palette12 = ['#C45404', '#D28F29', '#9CC4BC', '#416975', '#0E393D'];
+*/
+
+const backgrounds = ['#F7A8B1', '#C4F2D4', '#FAEEE1'];
 var rightEdgeTiles = [];
 var leftEdgeTiles = [];
 var bottomEdgeTiles = [];
 var topEdgeTiles = [];
 var edgeTiles = [];
 var traversed = [];
-var edgeBorder = 120;
+var edgeBorder = 0;
 
 function setup() {
-  createCanvas(1800, 1800);
-  background(getRandomBackground()); 
+  createCanvas(2000, 2000);
+  //background(getRandomBackground());
+  background(backgrounds[2]); 
   noLoop();
+
 }
 
 function draw() {
-  let spacing = (width-2*edgeBorder) / segments;
+  let spacing = (width -2*edgeBorder) / segments;
   populateEdgeTileArrays();
   stroke(0);
 
@@ -37,7 +49,7 @@ function draw() {
       tileIndex++;
     }
   }
-  //Use walk-functions to color pattern
+
   for (let index = 0; index < Tiles.length; index++) {
     if (Tiles[index].getType() == "forwardSlash") {
       if (Tiles[index].getUpper().getColor() == null) {
@@ -77,8 +89,9 @@ function draw() {
   for (let index = 0; index < Tiles.length; index++) {
     Tiles[index].getUpper().render();
     Tiles[index].getLower().render();
-    stroke(0);
-    line(Tiles[index].getLineX1(), Tiles[index].getLineY1(), Tiles[index].getLineX2(), Tiles[index].getLineY2());
+    stroke('#000000');
+    line(Tiles[index].getLineX1(), Tiles[index].getLineY1(), Tiles[index].getLineX2(), Tiles[index].getLineY2()).strokeCap(PROJECT);
+    
   }
 }
 
@@ -118,5 +131,11 @@ function traversePathFromSeed(_seed, _current, _prev, _triangle) {
     if (Tiles[current] === seed && seed.getUpper().getColor() != null && seed.getLower().getColor()) {
       break;
     }
+  }
+}
+
+function keyTyped(){
+  if (key === 's'){
+    save('export.png');
   }
 }

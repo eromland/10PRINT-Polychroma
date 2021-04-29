@@ -30,7 +30,7 @@ class triangleShape {
             this.getRandomColorFromPalette();
         }
         fill(this.triangleColor);
-        stroke(this.triangleColor);
+        noStroke();
         triangle(this.x1, this.y1, this.x2, this.y2, this.x3, this.y3);
     }
 
