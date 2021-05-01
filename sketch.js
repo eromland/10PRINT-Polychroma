@@ -2,7 +2,7 @@ var segments = 40;
 var Tiles = [];
 var tileIndex = 0;
 const palette1 = ['#1A4568', '#5F84A1', '#90AFC4', '#B6D0E1', '#CBDEED'];
-/* Additional palettes
+/*// Additional palettes
 const palette2 = ['#981C1C', '#AB2020', '#BF2424', '#C53939', '#CB4F4F'];
 const palette3 = ['#212226', '#1E4040', '#255954', '#3A8C7D', '#71D99E'];
 const palette4 = ['#F5F2DF', '#E07A5F', '#3D405B', '#81B29A', '#F2CC8F'];
@@ -23,17 +23,17 @@ var bottomEdgeTiles = [];
 var topEdgeTiles = [];
 var edgeTiles = [];
 var traversed = [];
-var edgeBorder = 0;
+var edgeBorder = 200;
 
 function setup() {
   createCanvas(2000, 2000);
-  //background(getRandomBackground());
-  background(backgrounds[2]); 
+  pixelDensity(5); // Change resolution of image
   noLoop();
 
 }
 
 function draw() {
+  background(getRandomBackground());
   let spacing = (width -2*edgeBorder) / segments;
   populateEdgeTileArrays();
   stroke(0);
