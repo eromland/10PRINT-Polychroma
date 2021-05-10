@@ -21,7 +21,7 @@ class triangleShape {
 
     getRandomColorFromPalette(){
         let pick = floor(random(0, palette1.length));
-        var col = palette1[pick];
+        var col = palette13[pick];
         this.setColor(col);
     }
 
